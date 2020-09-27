@@ -2,14 +2,22 @@ library(magrittr)
 library(tidyverse)
 library(rvest)
 
-url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
-
-html<-read_html(url)
-
-## pull tables which are player level data
-tables<-html %>% html_nodes("table") %>% html_table(fill=TRUE)
+## url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
 
 ## make a function for parsing all tables in same way
+#' Parse a rugbydump.com table list to extract home and away player level stats
+#' @description
+#' A low level function for parsing the table list retrived from rugbydump.com
+#' The home team and way player stats are combined and columns renamed by key values in a third table
+#'
+#' The function is not for direct use but is used as part of `get_player_stats`
+#'
+#' @param tables, a list containg the tables as retrieved from a rugbydump.com url using rvest `html_tables`
+#'
+#' @param index, the index of the table to be parse
+#'
+#'
+#'
 parse_player_tables<-function(tables,index){
   away_ind=index+5
   key_ind=index+10
@@ -43,18 +51,22 @@ parse_player_tables<-function(tables,index){
   return(qq)
 }
 
+html<-read_html(url)
+
+## pull tables which are player level data
+tables<-html %>% html_nodes("table") %>% html_table(fill=TRUE)
 ## map over the tables and merge them all
 player_stats<-map(seq(1,5),~parse_player_tables(tables,.x))%>%reduce(left_join)%>%
   mutate(across(-c("Number", "Player", "Sub", "Role", "Team", "Home/Away"),as.integer))
 
 ##### getting the team level stats from the bar/pie charts
 
-parse_team_stats<-function(html,wide=FALSE){
+parse_team_stats<-function(html,wide=TRUE){
 pattern='[\\w\\s\\.]+'
 raw_pi_df<-html%>%html_nodes(".key-stats-group-graph")%>%html_text%>%
   str_extract_all(pattern=pattern,simplify=TRUE)%>%as.data.frame%>%
   select(c(6:9,19:21))
-
+suppressWarnings(
 bind_rows(
 raw_pi_df%>%select(1:4)%>%mutate(Metric=case_when(
   is.na(as.numeric(V7)) ~ V7,
@@ -64,12 +76,13 @@ raw_pi_df%>%select(1:4)%>%mutate(Metric=case_when(
   is.na(as.numeric(V6)) ~ V7
 ),Home=case_when(
   is.na(as.numeric(V7)) ~ V9,
-  is.na(as.numeric(V6)) ~ V8   
+  is.na(as.numeric(V6)) ~ V8
 ))%>%select(Metric,Home,Away)
 ,
 raw_pi_df%>%select(5:7)%>%filter(!V19=="")%>%
   `colnames<-`(c("Metric","Away","Home"))
 )->team_stats
+)
 
 bind_rows(
 team_stats,
