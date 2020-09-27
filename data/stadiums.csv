@@ -1,0 +1,176 @@
+Stadium,Capacity,City,Country,active
+The National Stadium,"53,000",Cardiff,Wales,FALSE
+Lansdowne Road,"49,000",Dublin,Ireland,FALSE
+PETCO Park,"42,445",San Diego,United States,FALSE
+Athletic Park,"39,000",Wellington,New Zealand,FALSE
+Lancaster Park,"36,000",Christchurch,New Zealand,FALSE
+Carisbrook,"29,000",Dunedin,New Zealand,FALSE
+Dignity Health Sports Park,"27,000",Carson,United States,FALSE
+Cardiff City Stadium,"26,828",Cardiff,Wales,FALSE
+Vicarage Road,"19,920",Watford,England,FALSE
+Loftus Road,"18,500",London,England,FALSE
+Meadowbank Stadium,"16,500",Edinburgh,Scotland,FALSE
+Racecourse Ground,"15,500",Wrexham,Wales,FALSE
+Stade Jean-Bouin,"12,000",Paris,France,FALSE
+Edgeley Park,"10,900",Stockport,England,FALSE
+Firhill,"10,887",Glasgow,Scotland,FALSE
+FNB Stadium,"94,736",Johannesburg,South Africa,TRUE
+ANZ Stadium,"84,000",Sydney,Australia,TRUE
+Twickenham Stadium,"82,000",London,England,TRUE
+Stade de France,"81,338",Saint-Denis,France,TRUE
+Millennium Stadium,"74,500",Cardiff,Wales,TRUE
+Stadio Olimpico,"73,000",Rome,Italy,TRUE
+Murrayfield Stadium,"67,800",Edinburgh,Scotland,TRUE
+Ellis Park Stadium,"62,567",Johannesburg,South Africa,TRUE
+Soldier Field,"61,500",Chicago,United States,TRUE
+Stade Vélodrome,"60,013",Marseille,France,TRUE
+Optus Stadium,"60,000",Perth,Australia,TRUE
+Marvel Stadium,"56,347",Melbourne,Australia,TRUE
+Boris Paichadze Stadium,"56,000",Tbilisi,Georgia,TRUE
+Cape Town Stadium,"55,000",Cape Town,South Africa,TRUE
+National Stadium,"55,000",Singapore,Singapore,TRUE
+Estadio Ciudad de La Plata,"53,000",La Plata,Argentina,TRUE
+Suncorp Stadium,"52,500",Brisbane,Australia,TRUE
+Kings Park Stadium,"52,000",Durban,South Africa,TRUE
+DHL Newlands,"51,900",Cape Town,South Africa,TRUE
+Loftus Versfeld Stadium,"51,762",Pretoria,South Africa,TRUE
+Aviva Stadium,"51,700",Dublin,Ireland,TRUE
+King Baudouin Stadium,"51,122",Brussels,Belgium,TRUE
+Eden Park,"50,000",Auckland,New Zealand,TRUE
+The Sevens,"50,000[a 4]",Dubai,United Arab Emirates,TRUE
+Estadio José Amalfitani,"49,540",Buenos Aires,Argentina,TRUE
+Nelson Mandela Bay Stadium,"48,459",Port Elizabeth,South Africa,TRUE
+Allianz Stadium,"45,500",Sydney,Australia,TRUE
+Toyota Stadium,"45,000",Toyota,Japan,TRUE
+Patersons Stadium,"42,922",Perth,Australia,TRUE
+Matmut Atlantique,"42,115",Bordeaux,France,TRUE
+Hong Kong Stadium,"40,000",Wanchai,Hong Kong,TRUE
+Stadio della Vittoria,"40,000",Bari,Italy,TRUE
+Sam Boyd Stadium,"36,800",Las Vegas,United States,TRUE
+Free State Stadium,"36,538",Bloemfontein,South Africa,TRUE
+Allianz Riviera,"35,624",Nice,France,TRUE
+Renato Dall'Ara Stadium,"35,624",Bologne,Italy,TRUE
+Stadium Municipal,"35,472",Toulouse,France,TRUE
+Westpac Stadium,"34,500",Wellington,New Zealand,TRUE
+Stade Chaban-Delmas,"34,462",Bordeaux,France,TRUE
+Simonds Stadium,"34,074",Geelong,Australia,TRUE
+Rotorua International Stadium,"34,000",Rotorua,New Zealand,TRUE
+EPRU Stadium,"33,852",Port Elizabeth,South Africa,TRUE
+Adelaide Oval,"33,597",Adelaide,Australia,TRUE
+Ricoh Arena,"32,609",Coventry,England,TRUE
+Paris La Défense Arena,"32,000",Nanterre,France,TRUE
+Forsyth Barr Stadium at University Plaza,"30,748",Dunedin,New Zealand,TRUE
+Home's Stadium Kobe,"30,132",Kobe,Japan,TRUE
+AAMI Park,"30,050",Melbourne,Australia,TRUE
+Flaminio Stadium,"30,000",Rome,Italy,TRUE
+National Stadium,"30,000",Suva,Fiji,TRUE
+Kintetsu Hanazono Rugby Stadium,"30,000",Higashiōsaka,Japan,TRUE
+Mt Smart Stadium,"30,000",Auckland,New Zealand,TRUE
+Skilled Park,"27,400",Gold Coast,Australia,TRUE
+Mikheil Meskhi Stadium,"27,223",Tbilisi,Georgia,TRUE
+Chichibunomiya Rugby Stadium,"27,188",Tokyo,Japan,TRUE
+Ashton Gate Stadium,"27,000",Bristol,England,TRUE
+Stade Guy Boniface,"26,100",Mont-de-Marsan,France,TRUE
+Welford Road,"26,000[2]",Leicester,England,TRUE
+FMG Stadium Waikato,"25,800",Hamilton,New Zealand,TRUE
+Thomond Park,"25,600",Limerick,Ireland,TRUE
+Canberra Stadium,"25,011",Canberra,Australia,TRUE
+Pam Brink Stadium,"25,000",Springs,South Africa,TRUE
+North Harbour Stadium,"25,000",Albany,New Zealand,TRUE
+Okara Park,"25,000",Whangarei,New Zealand,TRUE
+Yarrow Stadium,"25,000",New Plymouth,New Zealand,TRUE
+The Darlington Arena,"25,000",Darlington,England,TRUE
+Madejski Stadium,"24,161",Reading,England,TRUE
+Dubai Exiles Rugby Ground,"24,000",Dubai,UAE,TRUE
+Central Stadium,"22,500",Krasnoyarsk,Russia,TRUE
+Parramatta Stadium[3],"20,741",Parramatta,Australia,TRUE
+Liberty Stadium,"20,532",Swansea,Wales,TRUE
+Headingley Stadium,"20,500",Leeds,England,TRUE
+Perth Oval,"20,500",Perth,Australia,TRUE
+Stade des Alpes,"20,068",Grenoble,France,TRUE
+Rio Tinto Stadium,"20,008",Sandy,United States,TRUE
+Concord Oval,"20,000",Concord,Australia,TRUE
+Leichhardt Oval,"20,000",Leichhardt,Australia,TRUE
+North Sydney Oval,"20,000",Sydney,Australia,TRUE
+Owen Delany Park,"20,000",Taupo,New Zealand,TRUE
+Stade Jean-Bouin,"20,000",Paris,France,TRUE
+Baypark Stadium,"19,800",Mount Maunganui,New Zealand,TRUE
+Dick's Sporting Goods Park,"19,680",Commerce City,United States,TRUE
+Meadow Lane,"19,588",Nottingham,England,TRUE
+Stadio Euganeo,"19,500",Padua,Italy,TRUE
+Stade Ernest-Wallon,"19,500",Toulouse,France,TRUE
+Queenstown Events Centre,"19,000",Queenstown,New Zealand,TRUE
+Brianteo Stadium,"18,500",Milan,Italy,TRUE
+Stade de la Méditerranée,"18,555",Béziers,France,TRUE
+RDS Arena,"18,500",Dublin,Ireland,TRUE
+Talen Energy Stadium,"18,500",Chester,United States,TRUE
+Ravenhill Stadium,"18,196",Belfast,Northern Ireland,TRUE
+Parc des Sports Marcel Michelin,"18,030",Clermont-Ferrand,France,TRUE
+Totally Wicked Stadium,"18,000",St Helens,England,TRUE
+Ballymore Stadium,"18,000",Brisbane,Australia,TRUE
+Churchill Park,"18,000",Lautoka,Fiji,TRUE
+ABSA Park,"18,000",Kimberley,South Africa,TRUE
+AMI Stadium,"18,000",Christchurch,New Zealand,TRUE
+Arena Manawatu,"18,000",Palmerston North,New Zealand,TRUE
+Estadio G.E.B.A.,"18,000",Buenos Aires,Argentina,TRUE
+Stade Aimé Giral,"17,500",Perpignan,France,TRUE
+Rugby Park Stadium,"17,000",Invercargill,New Zealand,TRUE
+Stade Jean Dauger,"17,000",Bayonne,France,TRUE
+Yamaha Stadium,"16,879",Iwata,Japan,TRUE
+Kingsholm Stadium,"16,500",Gloucester,England,TRUE
+Trafalgar Park,"16,000",Nelson,New Zealand,TRUE
+Danie Craven Stadium,"16,000",Stellenbosch,South Africa,TRUE
+Stade Mayol,"15,700",Toulon,France,TRUE
+Franklin's Gardens,"15,500",Northampton,England,TRUE
+Bilino Polje,"15,000",Zenica,Bosnia and Herzegovina,TRUE
+Parc des Sports Aguiléra,"15,000",Biarritz,France,TRUE
+Stade d'Albert Domec,"15,000",Carcassonne,France,TRUE
+Stade Amédée-Domenech,"15,000",Brive-la-Gaillarde,France,TRUE
+Stade Maurice Boyau,"15,000",Dax,France,TRUE
+Mizuho Rugby Stadium,"15,000",Nagoya City,Japan,TRUE
+Apia Park,"15,000",Apia,Samoa,TRUE
+Stade Makis,"15,000",Antananarivo,Madagascar,TRUE
+Parc y Scarlets,"14,870",Llanelli,Wales,TRUE
+Twickenham Stoop,"14,816",London,England,TRUE
+Altrad Stadium,"14,700",Montpellier,France,TRUE
+Stade Georges Pompidou,"14,380",Valence,France,TRUE
+Stadio Giglio,"14,138",Reggio Emilia,Italy,TRUE
+Stade Armandie,"14,000",Agen,France,TRUE
+Estadio Charrúa,"14,000",Montevideo,Uruguay,TRUE
+Stade Olympique Yves-du-Manoir,"14,000",Colombes,France,TRUE
+Stade du Hameau,"13,966",Pau,France,TRUE
+Recreation Ground,"13,500",Bath,England,TRUE
+Stadium Municipal d'Albi,"13,058",Albi,France,TRUE
+Stade Sapiac,"12,600",Montauban,France,TRUE
+BT Sport Cardiff Arms Park,"12,500",Cardiff,Wales,TRUE
+Stade Marcel-Deflandre,"12,500",La Rochelle,France,TRUE
+Sandy Park,"12,300",Exeter,England,TRUE
+Estadio Nacional Complutense,"12,400",Madrid,Spain,TRUE
+Sixways,"12,024",Worcester,England,TRUE
+Velodromo Paolo Borsellino,"12,000",Palermo,Italy,TRUE
+AJ Bell Stadium,"12,000",Salford,England,TRUE
+Alpine Energy Stadium,"12,000",Timaru,New Zealand,TRUE
+Brewery Field,"12,000",Bridgend,Wales,TRUE
+Arturo Collana Stadium,"12,000",Naples,Italy,TRUE
+Parc des Sports Et de l'Amitié,"12,000",Narbonne,France,TRUE
+Sunshine Coast Stadium,"12,000",Kawana Waters,Australia,TRUE
+Stade Lesdiguières,"11,900",Grenoble,France,TRUE
+Rodney Parade,"11,676","Newport, Wales",Wales,TRUE
+Stade Pierre-Antoine,"11,500",Castres,France,TRUE
+Bonney Field,"11,442",Sacramento,United States,TRUE
+Stade Michel Bendichou,"11,430",Colomiers,France,TRUE
+Stade Gabriel Montpied,"10,607",Clermont-Ferrand,France,TRUE
+Kingston Park,"10,200",Newcastle,England,TRUE
+Arena Civica,"10,200",Milan,Italy,TRUE
+Allianz Park,"10,000",London,England,TRUE
+Dubarry Park,"10,000",Athlone,Ireland,TRUE
+NRCA Stadium,"10,000",Amsterdam,Netherlands,TRUE
+Outeniqua Park,"10,000",George,South Africa,TRUE
+Tommaso Fattori Stadium,"10,000",L'Aquila,Italy,TRUE
+Pittwater Park,"10,000",Warriewood,Australia,TRUE
+Stade d'Albert Domec,"10,000",Carcassonne,France,TRUE
+Stade André Moga,"10,000",Bègles,France,TRUE
+Stade Pierre Rajon,"10,000",Bourgoin-Jallieu,France,TRUE
+Plebiscito Stadium,"10,000",Padua,Italy,TRUE
+Truman Bodden Stadium,"10,000",George Town,Cayman Islands,TRUE
+Viking Park,"10,000",Canberra,Australia,TRUE
