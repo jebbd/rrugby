@@ -1,63 +1,72 @@
-library(magrittr)
-library(tidyverse)
-library(rvest)
-
 ## url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
-
 ## make a function for parsing all tables in same way
-#' Parse a rugbydump.com table list to extract home and away player level stats
+
+#' Parse a rugbypass.com table list to extract home and away player level stats
 #' @description
-#' A low level function for parsing the table list retrived from rugbydump.com
-#' The home team and way player stats are combined and columns renamed by key values in a third table
+#' Extract the player statistics from a rugbydump match url.
+#' These urls identify an individual game and end in ".../stats/"
 #'
-#' The function is not for direct use but is used as part of `get_player_stats`
+#' @param data, a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
+#' @param is_html, is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
+#' @returns
+#' Retruns tibble with containing player level statistics from rugbypass.com
 #'
-#' @param tables, a list containg the tables as retrieved from a rugbydump.com url using rvest `html_tables`
-#'
-#' @param index, the index of the table to be parse
-#'
-#'
-#'
+#' @importFrom magrittr "%>%" "%<>%"
+#' @importFrom tibble "as_tibble"
+#' @import dplyr
+#' @importFrom rvest "html_nodes" "html_table"
+#' @importFrom xml2 "read_html"
+#' @importFrom stringr "str_replace" "str_replace_all"
+#' @importFrom purrr "map" "reduce"
+#' @export
+get_player_stats<-function(data,is_html=FALSE){
+
+  if(!is_html){
+    html<-xml2::read_html(data)
+  }else{
+    html<-data
+  }
+  ## pull tables which are player level data
+  tables<-html %>% rvest::html_nodes("table") %>% rvest::html_table(fill=TRUE)
+  ## map over the tables and merge them all
+  player_stats<-purrr::map(seq(1,5),~parse_player_tables(tables,.x))%>%purrr::reduce(~dplyr::left_join(.x,.y,by = c("Number", "Player", "Sub", "Role", "Team", "Home/Away")))%>%
+    dplyr::mutate(dplyr::across(-c("Number", "Player", "Sub", "Role", "Team", "Home/Away"),as.integer))%>%
+    dplyr::relocate(`Home/Away`)
+  return(player_stats)
+}
+
 parse_player_tables<-function(tables,index){
   away_ind=index+5
   key_ind=index+10
-  bind_rows(
-    as_tibble(tables[[index]],.name_repair = make.names)%>%rename("Number"=X)%>%
-    rename_with(~str_replace(.x,"\\.","_"),everything())%>%
-    filter(!is.na(Number))%>%
-    mutate(Sub=if_else(Number>15,TRUE,FALSE),
-          Role=case_when(
+  dplyr::bind_rows(
+    tibble::as_tibble(tables[[index]],.name_repair = make.names)%>%rename("Number"=X)%>%
+    dplyr::rename_with(~stringr::str_replace(.x,"\\.","_"),dplyr::everything())%>%
+    dplyr::filter(!is.na(Number))%>%
+    dplyr::mutate(Sub=dplyr::if_else(Number>15,TRUE,FALSE),
+          Role=dplyr::case_when(
             Number <= 8 ~ "Forward",
             Number <= 15 ~ "Back",
             Number <= 20 ~ "Forward",
             TRUE ~ "Back"
-          ),Team=nth(colnames(.),2),`Home/Away`="Home")%>%
-    rename("Player"=2),
-    as_tibble(tables[[away_ind]],.name_repair = make.names)%>%rename("Number"=X)%>%
-      rename_with(~str_replace(.x,"\\.","_"),everything())%>%
-      filter(!is.na(Number))%>%
-      mutate(Sub=if_else(Number>15,TRUE,FALSE),
-             Role=case_when(
+          ),Team=dplyr::nth(colnames(.),2),`Home/Away`="Home")%>%
+    dplyr::rename("Player"=2),
+    tibble::as_tibble(tables[[away_ind]],.name_repair = make.names)%>%dplyr::rename("Number"=X)%>%
+      dplyr::rename_with(~stringr::str_replace(.x,"\\.","_"),dplyr::everything())%>%
+      dplyr::filter(!is.na(Number))%>%
+      dplyr::mutate(Sub=if_else(Number>15,TRUE,FALSE),
+             Role=dplyr::case_when(
                Number <= 8 ~ "Forward",
                Number <= 15 ~ "Back",
                Number <= 20 ~ "Forward",
                TRUE ~ "Back"
-             ),Team=nth(colnames(.),2),`Home/Away`="Away")%>%
-      rename("Player"=2)
-  )->qq
-  k<-length(colnames(qq))-4
-  colnames(qq)[3:k]<-tables[[key_ind]][[2]]
-  qq%<>%rename_with(~str_replace_all(.x," ","_"))
-  return(qq)
+             ),Team=dplyr::nth(colnames(.),2),`Home/Away`="Away")%>%
+      dplyr::rename("Player"=2)
+  )->extracted_data
+  k<-length(colnames(extracted_data))-4
+  colnames(extracted_data)[3:k]<-tables[[key_ind]][[2]]
+  extracted_data %<>% dplyr::rename_with(~stringr::str_replace_all(.x," ","_"))
+  return(extracted_data)
 }
-
-html<-read_html(url)
-
-## pull tables which are player level data
-tables<-html %>% html_nodes("table") %>% html_table(fill=TRUE)
-## map over the tables and merge them all
-player_stats<-map(seq(1,5),~parse_player_tables(tables,.x))%>%reduce(left_join)%>%
-  mutate(across(-c("Number", "Player", "Sub", "Role", "Team", "Home/Away"),as.integer))
 
 ##### getting the team level stats from the bar/pie charts
 
