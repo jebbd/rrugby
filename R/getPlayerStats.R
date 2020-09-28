@@ -6,10 +6,10 @@
 #' Extract the player statistics from a rugbydump match url.
 #' These urls identify an individual game and end in ".../stats/"
 #'
-#' @param data, a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
-#' @param is_html, is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
+#' @param data a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
+#' @param is_html is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
 #' @returns
-#' Retruns tibble with containing player level statistics from rugbypass.com
+#' Returns tibble with containing player level statistics from rugbypass.com
 #'
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom tibble "as_tibble"
@@ -124,15 +124,15 @@ return(team_stats)
 }
 
 ### checking if shit worked yo
-Attack%>%select(-c(Number,Player,Team,Role,Sub))%>%
-  mutate(across(-`Home/Away`,as.numeric))%>%group_by(`Home/Away`)%>%
-  summarise(across(everything(),~sum(.x)))%>%t -> qq
-colnames(qq)<-qq[1,]
-qq%>%as.data.frame()%>%slice(2:n())%>%rownames_to_column("Metric")%>%
-  as_tibble%>%mutate(across(-Metric,as.numeric)) -> qq
+#Attack%>%select(-c(Number,Player,Team,Role,Sub))%>%
+#  mutate(across(-`Home/Away`,as.numeric))%>%group_by(`Home/Away`)%>%
+#  summarise(across(everything(),~sum(.x)))%>%t -> qq
+#colnames(qq)<-qq[1,]
+#qq%>%as.data.frame()%>%slice(2:n())%>%rownames_to_column("Metric")%>%
+#  as_tibble%>%mutate(across(-Metric,as.numeric)) -> qq
 
-team_stats%>%as_tibble%>%mutate(across(-Metric,as.double))%>%
-  mutate(Metric=case_when(
-    Metric=="Metres carried" ~ "Carries_Metres",
-    TRUE ~ Metric
-  ))->team_stats
+#team_stats%>%as_tibble%>%mutate(across(-Metric,as.double))%>%
+  #mutate(Metric=case_when(
+  #  Metric=="Metres carried" ~ "Carries_Metres",
+  #  TRUE ~ Metric
+  #))->team_stats

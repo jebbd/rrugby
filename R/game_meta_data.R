@@ -1,10 +1,10 @@
 library(tidyverse)
 library(lubridate)
 
-url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
+#url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
 
-urls<-read_lines("~/Desktop/my_r_packages/rrugby/international_urls.txt")
-stadiums<-read_csv("~/Desktop/my_r_packages/rrugby/stadiums.csv")
+#urls<-read_lines("~/Desktop/my_r_packages/rrugby/data/international_urls.txt")
+stadiums<-read_csv("~/Desktop/my_r_packages/rrugby/data/stadiums.csv")
 
 extract_venue<-function(url){
   stringr::str_extract(url,"at\\-[-\\w]+\\-on\\-")%>%
@@ -66,7 +66,7 @@ return(
 )
 }
 
-future::plan(multisession,workers=8)
-game_meta<-furrr::future_map_dfr(urls,~get_game_metadata(.x,stadiums))
+#future::plan(multisession,workers=8)
+#game_meta<-furrr::future_map_dfr(urls,~get_game_metadata(.x,stadiums))
 
-write_csv(game_meta,"~/Desktop/my_r_packages/rrugby/game_meta_data.csv")
+#write_csv(game_meta,"~/Desktop/my_r_packages/rrugby/game_meta_data.csv")
