@@ -1,10 +1,7 @@
-library(tidyverse)
-library(lubridate)
-
 #url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
-
 #urls<-read_lines("~/Desktop/my_r_packages/rrugby/data/international_urls.txt")
-stadiums<-read_csv("~/Desktop/my_r_packages/rrugby/data/stadiums.csv")
+
+stadiums<-readr::read_csv("~/Desktop/my_r_packages/rrugby/data/stadiums.csv")
 
 extract_venue<-function(url){
   stringr::str_extract(url,"at\\-[-\\w]+\\-on\\-")%>%
