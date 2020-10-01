@@ -1,29 +1,25 @@
-#url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
-#urls<-read_lines("~/Desktop/my_r_packages/rrugby/data/international_urls.txt")
-
-stadiums<-readr::read_csv("~/Desktop/my_r_packages/rrugby/data/stadiums.csv")
-
-extract_venue<-function(url){
-  stringr::str_extract(url,"at\\-[-\\w]+\\-on\\-")%>%
-    stringr::str_replace("at\\-","")%>%
-    stringr::str_replace("-on-","")%>%
-    stringr::str_replace_all("-"," ")->pattern
-  return(pattern)
-}
-
-pull_venue<-function(pattern,stadiums){
-dplyr::filter(stadiums,stringr::str_detect(Stadium,stringr::regex(paste0("^",pattern),ignore_case = T)))->df
-  if(nrow(df)==1){
-   return(dplyr::pull(df,Stadium))
-  }else{
-    dplyr::filter(df,active)->df
-    if(nrow(df)==1){
-      return(dplyr::pull(df,Stadium))
-    }else{
-      return(stringr::str_to_title(pattern))
-    }
-  }
-}
+#' Parse a rugbypass.com url to retrieve team level stats
+#' @description
+#' Extract the team statistics from a rugbypassmatch url.
+#' These urls identify an individual game and end in ".../stats/"
+#'
+#' @param data a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
+#' @param is_html is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
+#' @param wide return the data in wide or long format. Deafult is `TRUE` for wide data
+#' @returns
+#' Returns tibble with containing player level statistics from rugbypass.com
+#'
+#' @importFrom magrittr "%>%" "%<>%"
+#' @importFrom tibble "as_tibble"
+#' @import dplyr
+#' @importFrom rvest "html_nodes" "html_table"
+#' @importFrom xml2 "read_html"
+#' @importFrom stringr "str_replace" "str_replace_all" "str_extract_all"
+#' @importFrom purrr "map" "reduce" "map_dfr" "possibly"
+#' @importFrom glue "glue"
+#' @importFrom lubridate "dmy"
+#' @export
+rugby_stadiums<-readr::read_csv("~/Desktop/my_r_packages/rrugby/data/stadiums.csv")
 
 get_game_metadata<-function(url,stadiums){
 extract_venue(url)->pattern
@@ -40,8 +36,8 @@ if(stringr::str_detect(pattern,"emirates")){
 
 date<-stringr::str_extract(url,"\\-on\\-\\w+")%>%stringr::str_replace("on\\-","")%>%
   lubridate::dmy(.)
-date
-possible_read<-purrr::possibly(xml2::read_html,otherwise=NA_character_)
+
+
 html<-possible_read(url)
 if(!is.na(html)){
   html%>%rvest::html_nodes(".title-menu span")%>%rvest::html_text()%>%purrr::pluck(1)->competition
@@ -63,7 +59,26 @@ return(
 )
 }
 
-#future::plan(multisession,workers=8)
-#game_meta<-furrr::future_map_dfr(urls,~get_game_metadata(.x,stadiums))
+extract_venue<-function(url){
+  stringr::str_extract(url,"at\\-[-\\w]+\\-on\\-")%>%
+    stringr::str_replace("at\\-","")%>%
+    stringr::str_replace("-on-","")%>%
+    stringr::str_replace_all("-"," ")->pattern
+  return(pattern)
+}
 
-#write_csv(game_meta,"~/Desktop/my_r_packages/rrugby/game_meta_data.csv")
+pull_venue<-function(pattern,stadiums){
+  dplyr::filter(stadiums,stringr::str_detect(Stadium,stringr::regex(paste0("^",pattern),ignore_case = T)))->df
+  if(nrow(df)==1){
+    return(dplyr::pull(df,Stadium))
+  }else{
+    dplyr::filter(df,active)->df
+    if(nrow(df)==1){
+      return(dplyr::pull(df,Stadium))
+    }else{
+      return(stringr::str_to_title(pattern))
+    }
+  }
+}
+
+possible_read<-purrr::possibly(xml2::read_html,otherwise=NA_character_)

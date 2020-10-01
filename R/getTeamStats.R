@@ -67,7 +67,11 @@ get_team_stats<-function(data,is_html=FALSE,wide=TRUE){
     dplyr::mutate(dplyr::across(c(Home,Away),~dplyr::case_when(
       Metric=="Possession" ~ as.integer(.x*100),
       TRUE ~ as.integer(.x)
-    )))->team_stats
+    )))%>%
+    mutate(Metric=case_when(
+      Metric=="Kicks in play" ~ "% Kicks in play",
+      TRUE ~ Metric
+    ))->team_stats
 
   if(wide){
     team_stats%<>%dplyr::distinct()%>%
