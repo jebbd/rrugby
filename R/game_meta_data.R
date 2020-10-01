@@ -3,9 +3,7 @@
 #' Extract the team statistics from a rugbypassmatch url.
 #' These urls identify an individual game and end in ".../stats/"
 #'
-#' @param data a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
-#' @param is_html is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
-#' @param wide return the data in wide or long format. Deafult is `TRUE` for wide data
+#' @param url rugbypass.com url to retrieve data from. Can aslo be previously extracted html
 #' @returns
 #' Returns tibble with containing player level statistics from rugbypass.com
 #'
@@ -15,28 +13,25 @@
 #' @importFrom rvest "html_nodes" "html_table"
 #' @importFrom xml2 "read_html"
 #' @importFrom stringr "str_replace" "str_replace_all" "str_extract_all"
-#' @importFrom purrr "map" "reduce" "map_dfr" "possibly"
+#' @importFrom purrr "map" "reduce" "map_dfr" "possibly" "is_empty"
 #' @importFrom glue "glue"
 #' @importFrom lubridate "dmy"
 #' @export
-rugby_stadiums<-readr::read_csv("~/Desktop/my_r_packages/rrugby/data/stadiums.csv")
-
-get_game_metadata<-function(url,stadiums){
+get_game_metadata<-function(url){
 extract_venue(url)->pattern
-pull_venue(pattern,stadiums)->venue
+pull_venue(pattern,rugby_stadiums)->venue
 
 ## check if it's the official name of Ellis Park which I don't like
 if(stringr::str_detect(pattern,"emirates")){
-  pull_venue(pattern="ellis park",stadiums)->venue
-} else if(purrr::is_empty(venue)){
+  pull_venue(pattern="ellis park",rugby_stadiums)->venue
+}else if(purrr::is_empty(venue)){
   stringr::str_to_title(pattern)->venue
-} else if(str_detect(pattern,"murrayfield")){
+}else if(str_detect(pattern,"murrayfield")){
   venue<-"Murrayfield"
 }
 
 date<-stringr::str_extract(url,"\\-on\\-\\w+")%>%stringr::str_replace("on\\-","")%>%
   lubridate::dmy(.)
-
 
 html<-possible_read(url)
 if(!is.na(html)){
@@ -67,8 +62,8 @@ extract_venue<-function(url){
   return(pattern)
 }
 
-pull_venue<-function(pattern,stadiums){
-  dplyr::filter(stadiums,stringr::str_detect(Stadium,stringr::regex(paste0("^",pattern),ignore_case = T)))->df
+pull_venue<-function(pattern,rugby_stadiums){
+  dplyr::filter(rugby_stadiums,stringr::str_detect(Stadium,stringr::regex(glue::glue("^{pattern}"),ignore_case = T)))->df
   if(nrow(df)==1){
     return(dplyr::pull(df,Stadium))
   }else{
