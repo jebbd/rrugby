@@ -4,13 +4,15 @@
 \alias{get_game_metadata}
 \title{Parse a rugbypass.com url to retrieve team level stats}
 \usage{
-get_game_metadata(url)
+get_game_metadata(data, is_html = FALSE)
 }
 \arguments{
-\item{url}{rugbypass.com url to retrieve data from. Can aslo be previously extracted html}
+\item{data}{a rugbypass.com url to retrieve data from. Can aslo be previously extracted html}
+
+\item{is_html}{is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url}
 }
 \value{
-Returns tibble with containing player level statistics from rugbypass.com
+Returns tibble with containing game meta data (e.g. data, venue, score) from rugbypass.com
 }
 \description{
 Extract the team statistics from a rugbypassmatch url.
