@@ -28,6 +28,7 @@ pull_venue<-function(pattern){
 }
 
 possibly_read_html<-purrr::possibly(xml2::read_html,otherwise=NA_character_)
+possibly_scrape<-purrr::possibly(polite::scrape,otherwise=NA_character_)
 
 extract_game_url<-function(html){
   html%>%rvest::html_nodes("link")%>%

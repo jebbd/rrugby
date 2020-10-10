@@ -1,6 +1,6 @@
-#' Parse a rugbypass.com url to retrieve team level stats
+#' Parse a rugbypass.com url to retrieve game meta data
 #' @description
-#' Extract the team statistics from a rugbypassmatch url.
+#' Extract the game meta data from a rugbypassmatch url.
 #' These urls identify an individual game and end in ".../stats/"
 #'
 #' @param data a rugbypass.com url to retrieve data from. Can aslo be previously extracted html

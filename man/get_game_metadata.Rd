@@ -2,7 +2,7 @@
 % Please edit documentation in R/getMetaData.R
 \name{get_game_metadata}
 \alias{get_game_metadata}
-\title{Parse a rugbypass.com url to retrieve team level stats}
+\title{Parse a rugbypass.com url to retrieve game meta data}
 \usage{
 get_game_metadata(data, is_html = FALSE)
 }
@@ -15,6 +15,6 @@ get_game_metadata(data, is_html = FALSE)
 Returns tibble with containing game meta data (e.g. data, venue, score) from rugbypass.com
 }
 \description{
-Extract the team statistics from a rugbypassmatch url.
+Extract the game meta data from a rugbypassmatch url.
 These urls identify an individual game and end in ".../stats/"
 }
