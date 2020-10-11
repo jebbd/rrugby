@@ -40,6 +40,14 @@ collect_game_urls<-function(competitions,years=NULL,from=NULL,to=NULL,season=FAL
     purrr::map_chr(years,~glue::glue("{.x-1}-{.x}"))->years
   }
 
+  if(!all(competitions %in% rrugby::rugby_competitions)){
+    bompetition<-purrr::discard(rugtest,
+                   ~(.x %in% rrugby::rugby_competitions))%>%
+      glue::glue_collapse(sep=', ',last = ' and ')
+    stop(glue::glue("{bompetition} not recognised, must be one of:
+                    {glue::glue_collapse(rrugby::rugby_competitions, sep=', ')}"))
+  }
+
   map(competitions,~{
     comp<-.x
     map(years,~{
@@ -53,5 +61,5 @@ collect_game_urls<-function(competitions,years=NULL,from=NULL,to=NULL,season=FAL
           return(NULL)
         }
     })
-  })%>%unlist%>%purrr::compact%>%unique%>%return()
+  })%>%unlist%>%purrr::compact()%>%unique%>%return()
 }
