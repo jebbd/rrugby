@@ -9,7 +9,7 @@ get_player_stats(data, is_html = FALSE)
 \arguments{
 \item{data}{a rugbypass.com url to retrieve data from. Can aslo be previously extracted html}
 
-\item{is_html}{is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url}
+\item{is_html}{is the data a url or extracted html. Default is \code{FALSE} i.e. the data variable holds a url}
 }
 \value{
 Returns tibble with containing player level statistics from rugbypass.com

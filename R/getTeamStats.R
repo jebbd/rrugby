@@ -1,17 +1,17 @@
 #' Parse a rugbypass.com url to retrieve team level stats
 #' @description
-#' Extract the team statistics from a rugbypassmatch url.
+#' Extract the team statistics from a rugbypass match url.
 #' These urls identify an individual game and end in ".../stats/"
 #'
 #' @param data a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
-#' @param is_html is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
-#' @param wide return the data in wide or long format. Deafult is `TRUE` for wide data
+#' @param is_html is the data a url or extracted html. Default is \code{FALSE} i.e. the data variable holds a url
+#' @param wide return the data in wide or long format. Deafult is \code{TRUE} for wide data
 #' @returns
 #' Returns tibble with containing player level statistics from rugbypass.com
 #'
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom tibble "as_tibble"
-#' @import dplyr
+#' @importFrom dplyr "select" "distinct"
 #' @importFrom rvest "html_nodes" "html_table"
 #' @importFrom xml2 "read_html"
 #' @importFrom stringr "str_replace" "str_replace_all" "str_extract_all"

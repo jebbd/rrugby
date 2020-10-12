@@ -1,19 +1,16 @@
-## url<-"https://www.rugbypass.com/live/the-rugby-championship/new-zealand-vs-south-africa-at-westpac-stadium-on-15092018/2018/stats/"
-## make a function for parsing all tables in same way
-
 #' Parse a rugbypass.com url to retrieve player level stats
 #' @description
 #' Extract the player statistics from a rugbypass match url.
 #' These urls identify an individual game and end in ".../stats/"
 #'
 #' @param data a rugbypass.com url to retrieve data from. Can aslo be previously extracted html
-#' @param is_html is the data a url or extracted html. Default is `FALSE`` i.e. the data variable holds a url
+#' @param is_html is the data a url or extracted html. Default is \code{FALSE} i.e. the data variable holds a url
 #' @returns
 #' Returns tibble with containing player level statistics from rugbypass.com
 #'
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom tibble "as_tibble"
-#' @import dplyr
+#' @importFrom dplyr "left_join" "mutate" "relocate" "across" "rename_with" "filter" "everything" "if_else" "case_when" "nth" "rename"
 #' @importFrom rvest "html_nodes" "html_table"
 #' @importFrom xml2 "read_html"
 #' @importFrom stringr "str_replace" "str_replace_all"
@@ -28,7 +25,8 @@ get_player_stats<-function(data,is_html=FALSE){
   ## pull tables which are player level data
   tables<-html %>% rvest::html_nodes("table") %>% rvest::html_table(fill=TRUE)
   ## map over the tables and merge them all
-  player_stats<-purrr::map(seq(1,5),~parse_player_tables(tables,.x))%>%purrr::reduce(~dplyr::left_join(.x,.y,by = c("Number", "Player", "Sub", "Role", "Team", "Home/Away")))%>%
+  player_stats<-purrr::map(seq(1,5),~parse_player_tables(tables,.x))%>%
+    purrr::reduce(~dplyr::left_join(.x,.y,by = c("Number", "Player", "Sub", "Role", "Team", "Home/Away")))%>%
     dplyr::mutate(dplyr::across(-c("Number", "Player", "Sub", "Role", "Team", "Home/Away"),as.integer))%>%
     dplyr::relocate(`Home/Away`)
   return(player_stats)

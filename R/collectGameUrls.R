@@ -3,7 +3,7 @@
 #' Extract game urls from a rugbypass competition landing page.
 #' These urls identify an individual game and end in ".../stats/"
 #'
-#' @param competitions a vector of competitions to search, check \code{rugby_comps} tibble for accepted values
+#' @param competitions a vector of competitions to search, check \code{rugby_competitions} tibble for accepted values
 #' @param years a vector of years ; cannot be used with from and to
 #' @param from a year to start searching from
 #' @param to a year to search until ; from and to must be used together
@@ -14,11 +14,9 @@
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom polite "bow" "scrape"
 #' @importFrom tibble "as_tibble" "tibble"
-#' @import dplyr
-#' @import stringr
 #' @importFrom rvest "html_nodes" "html_attr"
 #' @importFrom xml2 "read_html"
-#' @importFrom purrr "map" "compact" "map_chr"
+#' @importFrom purrr "map" "compact" "map_chr" "discard"
 #' @importFrom glue "glue"
 #' @export
 collect_game_urls<-function(competitions,years=NULL,from=NULL,to=NULL,season=FALSE){
@@ -48,9 +46,9 @@ collect_game_urls<-function(competitions,years=NULL,from=NULL,to=NULL,season=FAL
                     {glue::glue_collapse(rrugby::rugby_competitions, sep=', ')}"))
   }
 
-  map(competitions,~{
+  purrr::map(competitions,~{
     comp<-.x
-    map(years,~{
+    purrr::map(years,~{
       url<-glue::glue("https://www.rugbypass.com/{comp}/matches/{.x}/")
       polite::bow(url)%>%
         possibly_scrape()->html

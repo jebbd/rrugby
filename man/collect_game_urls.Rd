@@ -13,7 +13,7 @@ collect_game_urls(
 )
 }
 \arguments{
-\item{competitions}{a vector of competitions to search, check \code{rugby_comps} tibble for accepted values}
+\item{competitions}{a vector of competitions to search, check \code{rugby_competitions} tibble for accepted values}
 
 \item{years}{a vector of years ; cannot be used with from and to}
 
