@@ -24,13 +24,12 @@ get_game_metadata<-function(data,is_html=FALSE){
       stop(glue::glue("{data} is not a valid rugbypass match url"))
     }
 
-    venue<-suppressMessages(format_venue(address))
+    venue<-suppressMessages(format_venue(data))
     date<-stringr::str_extract(data,"\\-on\\-\\w+")%>%stringr::str_replace("on\\-","")%>%
       lubridate::dmy(.)
     html<-possibly_read_html(data)
     address<-data
   }else{
-
     date<-data%>%rvest::html_nodes(".title-menu")%>%
             rvest::html_text()%>%stringr::str_extract("\\d{2} [:alpha:]+ \\d{4}")%>%
             lubridate::dmy()
