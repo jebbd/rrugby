@@ -10,11 +10,11 @@
 #'
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom tibble "as_tibble"
-#' @importFrom dplyr "left_join" "mutate" "relocate" "across" "rename_with" "filter" "everything" "if_else" "case_when" "nth" "rename"
+#' @importFrom dplyr "left_join" "mutate" "relocate" "across" "rename_with" "filter" "everything" "if_else" "case_when" "nth" "rename" "coalesce"
 #' @importFrom rvest "html_nodes" "html_table"
 #' @importFrom xml2 "read_html"
 #' @importFrom stringr "str_replace" "str_replace_all"
-#' @importFrom purrr "map" "reduce"
+#' @importFrom purrr "map" "reduce" "modify_if"
 #' @export
 get_player_stats<-function(data,is_html=FALSE){
   if(!is_html){
@@ -51,8 +51,10 @@ return_col_name<-function(col,index){
   defense<-list('T' = 'Tackles','MT' = 'Missed_Tackles','TW' = 'Turnovers_Won')
   kicking<-list('K' = 'Kicks_From_Hand','C' = 'Conversion_Goals',
     'PG' = 'Penalty_Goals','DG' = 'Drop_Goals_Converted')
-  set_plays<-list('TW' = 'Lineout_Throw_Won_Clean','LW' = 'Lineouts_Won','LS' = 'Lineout_Won_Steal')
-  discipline<-list('PC' = 'Penalties_Conceded','RC' = 'Red_Cards','YC' = 'Yellow_Cards')
+  set_plays<-list('TW' = 'Lineout_Won_Own_Throw',
+                  'LS' = 'Lineout_Won_Steal')
+  discipline<-list('PC' = 'Penalties_Conceded','RC' = 'Red_Cards',
+                   'YC' = 'Yellow_Cards')
   hash<-switch(index,
                attack,
                defense,
@@ -60,5 +62,6 @@ return_col_name<-function(col,index){
                set_plays,
                discipline
   )
-  hash[col]%>%unlist%>%unname
+  hash[cols]%>%purrr::modify_if(is.null,~NA_character_)%>%
+    unlist%>%unname%>%dplyr::coalesce(cols)
 }

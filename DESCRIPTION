@@ -1,6 +1,6 @@
 Package: rrugby
 Type: Package
-Title: What the Package Does (Title Case)
+Title: rrugby: A package to scrape match statistics from rugbypass.com
 Version: 0.2.0
 Author: Who wrote it
 Maintainer: The package maintainer <yourself@somewhere.net>
